@@ -1,0 +1,70 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  email     String   @unique
+  password  String
+  role      String   @default("admin")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Employee {
+  id               String      @id @default(auto()) @map("_id") @db.ObjectId
+  employeeId       String      @unique // E.g., EMP-10001
+  fullName         String
+  email            String      @unique
+  phone            String
+  gender           String
+  dob              DateTime
+  departmentId     String      @db.ObjectId
+  department       Department  @relation(fields: [departmentId], references: [id], onDelete: Restrict)
+  designation      String
+  salary           Float
+  joiningDate      DateTime
+  status           String      // Active, On Leave, Resigned, Suspended
+  address          String
+  emergencyContact String
+  profilePhoto     String?     // Optional profile image URL or base64
+  payrollRecords   Payroll[]
+  createdAt        DateTime    @default(now())
+  updatedAt        DateTime    @updatedAt
+}
+
+model Department {
+  id             String     @id @default(auto()) @map("_id") @db.ObjectId
+  departmentName String     @unique
+  departmentHead String
+  description    String
+  employees      Employee[]
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
+}
+
+model Payroll {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  employeeId   String   @db.ObjectId
+  employee     Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  basicSalary  Float
+  bonus        Float    @default(0.0)
+  deductions   Float    @default(0.0)
+  tax          Float    @default(0.0)
+  netSalary    Float
+  month        Int      // 1-12
+  year         Int      // e.g., 2026
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@unique([employeeId, month, year])
+}

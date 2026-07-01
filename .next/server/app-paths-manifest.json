@@ -1,0 +1,22 @@
+{
+  "/(dashboard)/departments/page": "app/(dashboard)/departments/page.js",
+  "/(dashboard)/employees/[id]/page": "app/(dashboard)/employees/[id]/page.js",
+  "/(dashboard)/employees/page": "app/(dashboard)/employees/page.js",
+  "/(dashboard)/page": "app/(dashboard)/page.js",
+  "/(dashboard)/payroll/page": "app/(dashboard)/payroll/page.js",
+  "/(dashboard)/profile/page": "app/(dashboard)/profile/page.js",
+  "/(dashboard)/reports/page": "app/(dashboard)/reports/page.js",
+  "/(dashboard)/settings/page": "app/(dashboard)/settings/page.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/api/departments/[id]/route": "app/api/departments/[id]/route.js",
+  "/api/departments/route": "app/api/departments/route.js",
+  "/api/employees/[id]/route": "app/api/employees/[id]/route.js",
+  "/api/employees/route": "app/api/employees/route.js",
+  "/api/login/route": "app/api/login/route.js",
+  "/api/logout/route": "app/api/logout/route.js",
+  "/api/me/route": "app/api/me/route.js",
+  "/api/payroll/[id]/route": "app/api/payroll/[id]/route.js",
+  "/api/payroll/route": "app/api/payroll/route.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/login/page": "app/login/page.js"
+}

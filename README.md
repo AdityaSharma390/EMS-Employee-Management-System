@@ -1,109 +1,93 @@
-# Full-Stack Employee Management System (EMS)
+# Employee Management System (EMS) - Separated Repo Structure
 
-A premium, highly secure, full-stack Employee Management System (EMS) built with Next.js 15 (App Router), TypeScript, Tailwind CSS, Prisma ORM, and Recharts.
-
----
-
-## Tech Stack
-
-- **Frontend**: Next.js 15 (App Router), TypeScript, Tailwind CSS, Lucide React, React Hook Form, Zod, Recharts, next-themes.
-- **Backend**: Next.js API Routes (Route Handlers), Prisma ORM, JWT (cookie-based session validation), bcrypt (password hashing).
-- **Database**: SQLite (local development), PostgreSQL (production-ready).
-- **Deployment**: Vercel.
+This repository has been decoupled into two separate standalone applications for easy evaluation, deployment, and submission.
 
 ---
 
-## Key Features
+## Folder Architecture
 
-1. **Authentication**: JWT token storage in secure HTTP-only cookies, password hashing with bcrypt, page & API route interception middleware.
-2. **Interactive Dashboard**: KPI metrics cards and data analytics charts (Workforce growth trends, Salary distribution, Department staffing size) using Recharts.
-3. **Employee Directory (CRUD)**: Create, read, update, and delete employees with comprehensive profiles.
-4. **Interactive Filters**: Quick search by name, email, or employee ID, and filters for department, status, and salary range.
-5. **Salary Management**: Generate, update, and delete monthly payroll slips. Computes Net Salaries in real time based on basic, bonus, deductions, and tax values.
-6. **Departments Management (CRUD)**: Manage departments, heads of departments, and live headcount statistics.
-7. **Reports & Exports**: Compile workforce directory list reports, payroll statements, department summaries, and salary logs. Supports one-click CSV export and clean PDF printing.
-8. **Dark & Light Mode**: Seamless theme switching with next-themes and customized tailwind colors.
+- **`/frontend`**: Next.js 15 App Router web client. Uses Tailwind CSS, shadcn/ui, Recharts, and React Hook Form. It requests data from the backend server.
+- **`/backend`**: Node.js + Express.js API server running Prisma ORM with MongoDB. Handles JWT sessions, password hashing, validations, and database mutations.
 
 ---
 
-## Folder Structure
+## 1. Backend Setup & Startup (`/backend`)
 
-```
-src/
-├── app/                  # Next.js Pages & API Route Handlers
-│   ├── (dashboard)/      # Protected workspace pages (Dashboard, Employees, Departments, Payroll, Reports)
-│   ├── api/              # API route endpoints (Auth, Employee, Department, Payroll CRUDs)
-│   └── login/            # Fullscreen LoginPage layout
-├── components/           # Reusable UI components (Sidebar, Navbar, ThemeToggle, Charts, Providers)
-├── lib/                  # Shared database (Prisma Client) and authentication helpers (JWT/bcrypt)
-├── validations/          # Zod input validation schemas for forms and API routes
-├── middleware.ts         # Edge-runtime JWT route protection middleware
-prisma/
-├── schema.prisma         # Prisma data model definition (configured for SQLite/PostgreSQL)
-└── seed.ts               # Database seed script for quick bootstrapping
-```
+The backend requires a MongoDB connection string. We recommend using a free cluster on **MongoDB Atlas** (which supports Replica Sets out-of-the-box, required by Prisma for database writes).
 
----
-
-## Installation & Local Setup
-
-### 1. Clone & Install Dependencies
-Navigate to the project directory:
-```bash
-npm install
-```
-
-### 2. Configure Environment Variables
-Copy `.env.example` to `.env`:
-```bash
-cp .env.example .env
-```
-Keep the default `DATABASE_URL="file:./dev.db"` to run with SQLite locally. Make sure you set a secure string for `JWT_SECRET`.
-
-### 3. Initialize Database & Seed
-Push the schema to the local SQLite database and populate it with mock corporate data (Admin account, departments, employees, and payroll history):
-```bash
-npx prisma db push
-npx tsx prisma/seed.ts
-```
-
-### 4. Run Development Server
-Start the local server:
-```bash
-npm run dev
-```
-Open `http://localhost:3000` in your browser.
+### Installation & Run Steps:
+1. Open a terminal and navigate to the backend directory:
+   ```bash
+   cd backend
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Create a `.env` file inside `/backend` and add your database URL & port details:
+   ```env
+   DATABASE_URL="mongodb+srv://<username>:<password>@cluster.mongodb.net/ems?retryWrites=true&w=majority"
+   JWT_SECRET="super-secret-jwt-key-for-employee-management-system-2026"
+   PORT=5000
+   ```
+4. Generate the database client:
+   ```bash
+   npx prisma generate
+   ```
+5. Seed the database with default administrator login and initial mock profiles:
+   ```bash
+   npx tsx prisma/seed.ts
+   ```
+6. Launch development server:
+   ```bash
+   npm run dev
+   ```
+   *The server will start listening at `http://localhost:5000`.*
 
 ---
 
-## Demo Credentials (Admin Account)
+## 2. Frontend Setup & Startup (`/frontend`)
 
+The frontend is a Next.js client that requests data from the Express backend.
+
+### Installation & Run Steps:
+1. Open a terminal and navigate to the frontend directory:
+   ```bash
+   cd frontend
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Create a `.env` file inside `/frontend` and configure your API endpoint matching the backend port:
+   ```env
+   NEXT_PUBLIC_API_URL="http://localhost:5000"
+   JWT_SECRET="super-secret-jwt-key-for-employee-management-system-2026"
+   ```
+4. Start development client:
+   ```bash
+   npm run dev
+   ```
+   *The application will boot at `http://localhost:3000`.*
+
+---
+
+## 3. Demo Credentials for Login
+
+Use these default credentials to log in once both servers are running:
 - **Email**: `admin@ems.com`
 - **Password**: `admin123`
 
 ---
 
-## Deployment to Vercel (PostgreSQL)
+## 4. Deployment Instructions
 
-To deploy the Employee Management System to Vercel using a PostgreSQL database (e.g., Supabase or Neon):
+### Backend (Render, Heroku, or Railway)
+- Set build command: `npx prisma generate && npm run build`
+- Start command: `npm run start`
+- Inject environment variables `DATABASE_URL` and `JWT_SECRET` in your provider's dashboard.
 
-### 1. Database Configuration
-In `prisma/schema.prisma`, edit the `datasource db` block:
-```prisma
-datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
-}
-```
-
-### 2. Set Vercel Environment Variables
-Set the following environment variables in your Vercel Project Dashboard:
-- `DATABASE_URL`: Your PostgreSQL connection string.
-- `JWT_SECRET`: A secure random secret key.
-
-### 3. Configure Deployment Commands
-Ensure Vercel runs Prisma migrations during build by editing your build command or package.json scripts:
-```bash
-# In Vercel build configuration:
-prisma generate && prisma migrate deploy && next build
-```
+### Frontend (Vercel)
+- Target directory: `/frontend`
+- Build command: `npm run build`
+- Inject environment variable `NEXT_PUBLIC_API_URL` pointing to your deployed backend URL.

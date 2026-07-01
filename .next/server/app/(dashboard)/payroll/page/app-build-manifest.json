@@ -1,0 +1,19 @@
+{
+  "pages": {
+    "/(dashboard)/payroll/page": [
+      "static/chunks/ff1a16fafef87110.js",
+      "static/chunks/6a7993b07cb97bb3.js",
+      "static/chunks/408b157d27973c1c.css",
+      "static/chunks/0aa7a2061727042c.js",
+      "static/chunks/6d5cbe908c02f4ad.js",
+      "static/chunks/47d304331d96597b.js",
+      "static/chunks/3f16c1a008586794.js",
+      "static/chunks/331e23213c8847a2.js",
+      "static/chunks/91adb7bdb9870c6a.js",
+      "static/chunks/916276f450790128.js",
+      "static/chunks/8082ab48faca5ea1.js",
+      "static/chunks/7b7f1bf3900a5477.js",
+      "static/chunks/turbopack-314e8e66f3a50f4e.js"
+    ]
+  }
+}

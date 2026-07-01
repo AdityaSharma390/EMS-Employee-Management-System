@@ -1,0 +1,22 @@
+{
+  "/(dashboard)/departments/page": "/departments",
+  "/(dashboard)/employees/[id]/page": "/employees/[id]",
+  "/(dashboard)/employees/page": "/employees",
+  "/(dashboard)/page": "/",
+  "/(dashboard)/payroll/page": "/payroll",
+  "/(dashboard)/profile/page": "/profile",
+  "/(dashboard)/reports/page": "/reports",
+  "/(dashboard)/settings/page": "/settings",
+  "/_not-found/page": "/_not-found",
+  "/api/departments/[id]/route": "/api/departments/[id]",
+  "/api/departments/route": "/api/departments",
+  "/api/employees/[id]/route": "/api/employees/[id]",
+  "/api/employees/route": "/api/employees",
+  "/api/login/route": "/api/login",
+  "/api/logout/route": "/api/logout",
+  "/api/me/route": "/api/me",
+  "/api/payroll/[id]/route": "/api/payroll/[id]",
+  "/api/payroll/route": "/api/payroll",
+  "/favicon.ico/route": "/favicon.ico",
+  "/login/page": "/login"
+}
