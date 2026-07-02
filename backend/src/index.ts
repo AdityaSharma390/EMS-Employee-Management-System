@@ -17,16 +17,17 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Configure CORS to support frontend cookies transmission
-const allowedOrigins = [
-  "http://localhost:3000",
-  process.env.FRONTEND_URL,
-].filter(Boolean) as string[];
-
 app.use(
   cors({
     origin: (origin, callback) => {
-      // Allow local development origin matching or production FRONTEND_URL
-      if (!origin || allowedOrigins.includes(origin) || process.env.NODE_ENV !== "production") {
+      // Allow localhost, vercel subdomains, or custom FRONTEND_URL
+      if (
+        !origin ||
+        process.env.NODE_ENV !== "production" ||
+        origin === "http://localhost:3000" ||
+        origin.endsWith(".vercel.app") ||
+        (process.env.FRONTEND_URL && origin === process.env.FRONTEND_URL)
+      ) {
         callback(null, true);
       } else {
         callback(new Error("Not allowed by CORS"));
