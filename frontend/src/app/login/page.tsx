@@ -51,9 +51,9 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-slate-900 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(79,70,229,0.3),rgba(255,255,255,0))] px-4">
+    <div className="min-h-screen flex items-center justify-center bg-slate-50 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(99,102,241,0.15),rgba(255,255,255,0))] dark:bg-slate-900 px-4 transition-colors">
       <div className="w-full max-w-md animate-fade-in">
-        <div className="bg-slate-950/40 backdrop-blur-xl border border-slate-800 rounded-2xl p-8 shadow-2xl relative overflow-hidden">
+        <div className="bg-white/80 dark:bg-slate-950/40 backdrop-blur-xl border border-slate-200/80 dark:border-slate-800 rounded-2xl p-8 shadow-xl relative overflow-hidden">
           <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-indigo-500/50 to-transparent" />
 
           {/* Logo & Header */}
@@ -61,19 +61,19 @@ export default function LoginPage() {
             <div className="p-3 bg-indigo-600 rounded-2xl text-white mb-3 shadow-lg shadow-indigo-600/30">
               <Briefcase size={28} />
             </div>
-            <h2 className="text-2xl font-bold text-white tracking-tight">Welcome Back</h2>
-            <p className="text-slate-400 text-sm mt-1">Sign in to manage employees & payroll</p>
+            <h2 className="text-2xl font-bold text-slate-800 dark:text-white tracking-tight">Welcome Back</h2>
+            <p className="text-slate-500 dark:text-slate-400 text-sm mt-1">Sign in to manage employees & payroll</p>
           </div>
 
           {/* Messages */}
           {error && (
-            <div className="mb-6 p-4 rounded-xl bg-red-950/30 border border-red-500/30 text-red-400 text-xs font-medium animate-bounce">
+            <div className="mb-6 p-4 rounded-xl bg-red-50 dark:bg-red-950/30 border border-red-200 dark:border-red-500/30 text-red-650 dark:text-red-400 text-xs font-medium animate-bounce">
               {error}
             </div>
           )}
 
           {success && (
-            <div className="mb-6 p-4 rounded-xl bg-green-950/30 border border-green-500/30 text-green-400 text-xs font-medium">
+            <div className="mb-6 p-4 rounded-xl bg-green-50 dark:bg-green-950/30 border border-green-200 dark:border-green-500/30 text-green-700 dark:text-green-400 text-xs font-medium">
               Login successful! Redirecting to dashboard...
             </div>
           )}
@@ -81,42 +81,42 @@ export default function LoginPage() {
           {/* Inputs */}
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
             <div>
-              <label className="block text-slate-300 text-xs font-semibold mb-2" htmlFor="email">
+              <label className="block text-slate-700 dark:text-slate-300 text-xs font-semibold mb-2" htmlFor="email">
                 Admin Email
               </label>
               <div className="relative">
-                <Mail className="absolute left-3.5 top-3.5 text-slate-500" size={16} />
+                <Mail className="absolute left-3.5 top-3.5 text-slate-400" size={16} />
                 <input
                   id="email"
                   type="email"
                   placeholder="admin@ems.com"
                   {...register("email")}
-                  className="w-full bg-slate-900 border border-slate-800 focus:border-indigo-500/60 rounded-xl pl-11 pr-4 py-3 text-sm outline-none text-white transition-all placeholder:text-slate-600"
+                  className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 focus:border-indigo-500/60 focus:ring-1 focus:ring-indigo-500/30 rounded-xl pl-11 pr-4 py-3 text-sm outline-none text-slate-800 dark:text-white transition-all placeholder:text-slate-400"
                   disabled={isSubmitting || success}
                 />
               </div>
               {errors.email && (
-                <p className="text-red-400 text-[10px] mt-1.5 font-medium">{errors.email.message}</p>
+                <p className="text-red-500 dark:text-red-400 text-[10px] mt-1.5 font-medium">{errors.email.message}</p>
               )}
             </div>
 
             <div>
-              <label className="block text-slate-300 text-xs font-semibold mb-2" htmlFor="password">
+              <label className="block text-slate-700 dark:text-slate-300 text-xs font-semibold mb-2" htmlFor="password">
                 Password
               </label>
               <div className="relative">
-                <Lock className="absolute left-3.5 top-3.5 text-slate-500" size={16} />
+                <Lock className="absolute left-3.5 top-3.5 text-slate-400" size={16} />
                 <input
                   id="password"
                   type="password"
                   placeholder="••••••••"
                   {...register("password")}
-                  className="w-full bg-slate-900 border border-slate-800 focus:border-indigo-500/60 rounded-xl pl-11 pr-4 py-3 text-sm outline-none text-white transition-all placeholder:text-slate-600"
+                  className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 focus:border-indigo-500/60 focus:ring-1 focus:ring-indigo-500/30 rounded-xl pl-11 pr-4 py-3 text-sm outline-none text-slate-800 dark:text-white transition-all placeholder:text-slate-400"
                   disabled={isSubmitting || success}
                 />
               </div>
               {errors.password && (
-                <p className="text-red-400 text-[10px] mt-1.5 font-medium">{errors.password.message}</p>
+                <p className="text-red-500 dark:text-red-400 text-[10px] mt-1.5 font-medium">{errors.password.message}</p>
               )}
             </div>
 
@@ -137,14 +137,14 @@ export default function LoginPage() {
           </form>
 
           {/* Info Banner */}
-          <div className="mt-8 text-center border-t border-slate-800/80 pt-6">
-            <span className="text-slate-500 text-xs">Demo Credentials</span>
-            <div className="flex justify-center gap-4 mt-2 text-[10px] text-slate-400">
+          <div className="mt-8 text-center border-t border-slate-100 dark:border-slate-800/80 pt-6">
+            <span className="text-slate-400 dark:text-slate-500 text-xs">Demo Credentials</span>
+            <div className="flex justify-center gap-4 mt-2 text-[10px] text-slate-500 dark:text-slate-400">
               <div>
-                <span className="font-semibold text-slate-300">Email:</span> admin@ems.com
+                <span className="font-semibold text-slate-650 dark:text-slate-300">Email:</span> admin@ems.com
               </div>
               <div>
-                <span className="font-semibold text-slate-300">Pass:</span> admin123
+                <span className="font-semibold text-slate-650 dark:text-slate-300">Pass:</span> admin123
               </div>
             </div>
           </div>

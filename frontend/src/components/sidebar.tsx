@@ -55,15 +55,15 @@ export function Sidebar() {
   };
 
   return (
-    <aside className="w-64 h-screen bg-slate-900 text-slate-100 flex flex-col fixed left-0 top-0 border-r border-slate-800 z-30">
+    <aside className="w-64 h-screen bg-white dark:bg-slate-950 text-slate-700 dark:text-slate-100 flex flex-col fixed left-0 top-0 border-r border-slate-100 dark:border-slate-850 z-30 transition-colors">
       {/* Brand Logo */}
-      <div className="p-6 border-b border-slate-800 flex items-center gap-3">
+      <div className="p-6 border-b border-slate-100 dark:border-slate-850 flex items-center gap-3">
         <div className="p-2 bg-indigo-600 rounded-lg text-white">
           <Briefcase size={20} />
         </div>
         <div>
-          <h1 className="font-bold text-lg leading-none">EMS Admin</h1>
-          <span className="text-xs text-slate-400">Management Suite</span>
+          <h1 className="font-bold text-lg leading-none text-slate-800 dark:text-white">EMS Admin</h1>
+          <span className="text-xs text-slate-400 dark:text-slate-500">Management Suite</span>
         </div>
       </div>
 
@@ -82,7 +82,7 @@ export function Sidebar() {
               className={`flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200 ${
                 isActive
                   ? "bg-indigo-600 text-white shadow-lg shadow-indigo-600/20"
-                  : "text-slate-400 hover:bg-slate-800/60 hover:text-slate-200"
+                  : "text-slate-500 hover:bg-slate-100/70 hover:text-slate-900 dark:text-slate-450 dark:hover:bg-slate-800/60 dark:hover:text-slate-200"
               }`}
             >
               <item.icon size={18} />
@@ -93,11 +93,11 @@ export function Sidebar() {
       </nav>
 
       {/* Logout Area */}
-      <div className="p-4 border-t border-slate-800">
+      <div className="p-4 border-t border-slate-100 dark:border-slate-850">
         <button
           onClick={handleLogout}
           disabled={isLoggingOut}
-          className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-slate-400 hover:bg-red-950/40 hover:text-red-400 transition-all duration-200 cursor-pointer disabled:opacity-50"
+          className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-slate-500 dark:text-slate-450 hover:bg-red-50/70 hover:text-red-600 dark:hover:bg-red-950/40 dark:hover:text-red-400 transition-all duration-200 cursor-pointer disabled:opacity-50"
         >
           <LogOut size={18} />
           {isLoggingOut ? "Logging out..." : "Logout"}
