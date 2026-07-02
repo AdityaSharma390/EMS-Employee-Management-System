@@ -37,6 +37,10 @@ export default function LoginPage() {
       }
 
       setSuccess(true);
+      
+      // Store token in a client-side cookie on the vercel.app domain
+      document.cookie = `token=${result.token}; path=/; max-age=86400; Secure; SameSite=Lax`;
+
       setTimeout(() => {
         router.refresh();
         router.push("/");

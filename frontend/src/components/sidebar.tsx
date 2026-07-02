@@ -41,10 +41,11 @@ export function Sidebar() {
       setIsLoggingOut(true);
       try {
         const res = await clientFetch("/api/auth/logout", { method: "POST" });
-        if (res.ok) {
-          router.refresh();
-          router.push("/login");
-        }
+        // Clear local cookie
+        document.cookie = "token=; path=/; max-age=0; Secure; SameSite=Lax";
+        
+        router.refresh();
+        router.push("/login");
       } catch {
         console.error("Logout failed");
       } finally {
